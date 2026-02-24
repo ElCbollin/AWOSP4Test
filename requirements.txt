@@ -1,2 +1,4 @@
 Flask
 Gunicorn
+mysql-connector-python
+Flask-Cors
