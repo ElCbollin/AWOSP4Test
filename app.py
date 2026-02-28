@@ -14,7 +14,7 @@ mydb = mysql.connector.connect(
 
 
 @app.route('/preguntas')
-def productos():
+def preguntas():
 
     mycursor = mydb.cursor()
     mycursor.execute("SELECT * FROM Preguntas")
