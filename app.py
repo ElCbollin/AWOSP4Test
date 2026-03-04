@@ -13,7 +13,7 @@ mydb = mysql.connector.connect(
     )
 
 @app.route('/cursos')
-def preguntas():
+def cursos():
 
     mycursor = mydb.cursor(dictionary=True)
     mycursor.execute("SELECT * FROM MostrarCursos")
@@ -32,7 +32,7 @@ def preguntas():
 @app.post('/insertarPregunta')
 def insertar_pregunta():
 
-    mycursor = mydb.cursor(dictionary=True)
+    mycursor = mydb.cursor()
     sql = "CALL CrearPregunta(%s, %s, %s)"
     val = (request.form["txtPregunta"], request.form["cboCurso"], request.form["txtValor"])
     mycursor.execute(sql, val)
@@ -42,7 +42,7 @@ def insertar_pregunta():
 @app.post('/modificarPregunta')
 def modificar_pregunta():
 
-    mycursor = mydb.cursor(dictionary=True)
+    mycursor = mydb.cursor()
     sql = "call ModificarPregunta(%s,%s,%s,%s)"
     val = (request.form["cboCurso"], request.form["txtValor"], request.form["txtPregunta"],request.form["txtId"])
     mycursor.execute(sql, val)
@@ -52,7 +52,7 @@ def modificar_pregunta():
 @app.post('/eliminarPregunta')
 def eliminar_pregunta():
 
-    mycursor = mydb.cursor(dictionary=True)
+    mycursor = mydb.cursor()
     sql = "call EliminarPregunta(%s)"
     val = (request.form["txtId"],)
     mycursor.execute(sql, val)
