@@ -12,12 +12,20 @@ mydb = mysql.connector.connect(
         database="u760464709_24005037_bd"
     )
 
+@app.route('/cursos')
+def preguntas():
+
+    mycursor = mydb.cursor(dictionary=True)
+    mycursor.execute("SELECT * FROM MostrarCursos")
+    myresult = mycursor.fetchall()
+    return make_response(jsonify(myresult))
+
 
 @app.route('/preguntas')
 def preguntas():
 
     mycursor = mydb.cursor(dictionary=True)
-    mycursor.execute("SELECT * FROM Preguntas")
+    mycursor.execute("SELECT * FROM MostrarPreguntas")
     myresult = mycursor.fetchall()
     return make_response(jsonify(myresult))
 
