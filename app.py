@@ -16,7 +16,7 @@ mydb = mysql.connector.connect(
 @app.route('/preguntas')
 def preguntas():
 
-    mycursor = mydb.cursor()
+    mycursor = mydb.cursor(dictionary=True)
     mycursor.execute("SELECT * FROM Preguntas")
     myresult = mycursor.fetchall()
     return make_response(jsonify(myresult))
@@ -24,7 +24,7 @@ def preguntas():
 @app.post('/insertarPregunta')
 def insertar_pregunta():
 
-    mycursor = mydb.cursor()
+    mycursor = mydb.cursor(dictionary=True)
     sql = "CALL CrearPregunta(%s, %s, %s)"
     val = (request.form["txtPregunta"], request.form["cboCurso"], request.form["txtValor"])
     mycursor.execute(sql, val)
@@ -34,7 +34,7 @@ def insertar_pregunta():
 @app.post('/modificarPregunta')
 def modificar_pregunta():
 
-    mycursor = mydb.cursor()
+    mycursor = mydb.cursor(dictionary=True)
     sql = "call ModificarPregunta(%s,%s,%s,%s)"
     val = (request.form["cboCurso"], request.form["txtValor"], request.form["txtPregunta"],request.form["txtId"])
     mycursor.execute(sql, val)
@@ -44,7 +44,7 @@ def modificar_pregunta():
 @app.post('/eliminarPregunta')
 def eliminar_pregunta():
 
-    mycursor = mydb.cursor()
+    mycursor = mydb.cursor(dictionary=True)
     sql = "call EliminarPregunta(%s)"
     val = (request.form["txtId"],)
     mycursor.execute(sql, val)
